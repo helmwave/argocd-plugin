@@ -13,8 +13,8 @@ configs:
 repoServer:
   volumes:
     - configMap:
-        name: helmwave-plugin-config
-      name: helmwave-plugin-config
+        name: argocd-cmp-cm
+      name: hargocd-cmp-cm
     - emptyDir: {}
       name: cmp-tmp
 
@@ -33,7 +33,7 @@ repoServer:
         - mountPath: /home/argocd/cmp-server/plugins
           name: plugins
         - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-          subPath: plugin.yaml
-          name: helmwave-plugin-config
+          subPath: helmwave-plugin.yaml
+          name: argocd-cmp-cm
         - mountPath: /tmp
           name: cmp-tmp
