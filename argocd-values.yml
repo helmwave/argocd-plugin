@@ -1,0 +1,39 @@
+configs:
+  cmp:
+    plugins:
+      helmwave-plugin:
+        generate:
+          command: [ "/bin/ash", "-c" ]
+          args:
+            - | 
+              helmwave build --yml &> log.txt && find .helmwave/manifest -type f -exec cat {} \;
+        discover:
+          fileName: "./helmwave.yml*"
+
+repoServer:
+  volumes:
+    - configMap:
+        name: helmwave-plugin-config
+      name: helmwave-plugin-config
+    - emptyDir: {}
+      name: cmp-tmp
+
+
+  extraContainers:
+    - name: helmwave-plugin
+      command: [ /var/run/argocd/argocd-cmp-server ]
+      args: [ --loglevel, debug ]
+      image: ghcr.io/helmwave/helmwave:0.36.4
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+      volumeMounts:
+        - mountPath: /var/run/argocd
+          name: var-files
+        - mountPath: /home/argocd/cmp-server/plugins
+          name: plugins
+        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+          subPath: plugin.yaml
+          name: helmwave-plugin-config
+        - mountPath: /tmp
+          name: cmp-tmp
