@@ -6,7 +6,7 @@ configs:
           command: [ "/bin/ash", "-c" ]
           args:
             - | 
-              helmwave build --yml &> log.txt && find .helmwave/manifest -type f -exec cat {} \;
+              helmwave build &> log.txt && find .helmwave/manifest -type f -exec cat {} \;
         discover:
           fileName: "./helmwave.yml*"
 
