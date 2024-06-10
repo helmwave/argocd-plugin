@@ -1,0 +1,8 @@
+auth:
+  rootPassword: openitnow
+  rootUser: admin
+
+commonLabels: &labels
+  hello: world
+
+podLabels: *labels
