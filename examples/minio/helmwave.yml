@@ -1,0 +1,24 @@
+project: minio
+
+registries:
+  - host: registry-1.docker.io
+
+.options: &options
+  namespace: minio
+  offline_kube_version: 1.27.0 # Required for argocd-helmwave-plugin
+  wait: true
+  wait_for_jobs: true
+  timeout: 20m
+  max_history: 3 # best practice
+  pending_release_strategy: rollback # go back
+  create_namespace: true
+
+
+releases:
+  - name: minio
+    <<: *options
+    chart: oci://registry-1.docker.io/bitnamicharts/minio
+    tags: [minio]
+    values:
+      - minio-values.yaml
+
