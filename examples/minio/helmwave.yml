@@ -20,5 +20,5 @@ releases:
     chart: oci://registry-1.docker.io/bitnamicharts/minio
     tags: [minio]
     values:
-      - minio-values.yaml
+      - minio-values.yml
 
