@@ -1,12 +1,13 @@
 configs:
+  create: true
   cmp:
     plugins:
       helmwave-plugin:
         generate:
           command: [ "/bin/ash", "-c" ]
           args:
-            - | 
-              helmwave build &> log.txt && find .helmwave/manifest -type f -exec cat {} \;
+            - |
+              helmwave build &> /tmp/log.txt && find .helmwave/manifest -type f | xargs cat
         discover:
           fileName: "./helmwave.yml*"
 
@@ -14,7 +15,7 @@ repoServer:
   volumes:
     - configMap:
         name: argocd-cmp-cm
-      name: hargocd-cmp-cm
+      name: argocd-cmp-cm
     - emptyDir: {}
       name: cmp-tmp
 
@@ -27,6 +28,16 @@ repoServer:
       securityContext:
         runAsNonRoot: true
         runAsUser: 999
+      env:
+        - name: HELM_CONFIG_HOME
+          value: ./helm-config
+        - name: HELM_CACHE_HOME
+          value: ./helm-cache
+        - name: HELM_DATA_HOME
+          value: ./helm-data
+        - name: HELMWAVE_DIFF_MODE
+          value: none
+
       volumeMounts:
         - mountPath: /var/run/argocd
           name: var-files
