@@ -1,5 +1,7 @@
 # argocd plugin for helmwave
 
+![test](./examples/minio/image.png)
+
 1. Patch your argocd.
 
    We have prepared `argocd-values.yml` for [official argocd helm chart](https://github.com/argoproj/argo-helm/tree/main/charts/argo-cd)
