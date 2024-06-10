@@ -13,10 +13,10 @@ Follow documentation https://argo-cd.readthedocs.io/en/stable/operator-manual/co
 
 2. Create a repo with `helmwave.yml`
 
-  See here: [examples/minio](./examples/minio/helmwave.yml)
+  See here: [examples/minio/helmwave.yml](./examples/minio/helmwave.yml)
   
 4. Create argo-cd application
 
-  See here: [examples/minio](./examples/minio/argocd-application.yml)
+  See here: [examples/minio/argocd-application.yml](./examples/minio/argocd-application.yml)
 
   
