@@ -1,6 +1,6 @@
 configs:
-  create: true
   cmp:
+    create: true
     plugins:
       helmwave-plugin:
         generate:
